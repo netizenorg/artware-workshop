@@ -1,0 +1,90 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  background-color: #bcbcbc;
+  font-family: sans-serif;
+}
+
+body {
+  border: 4px inset white;
+  min-height: 100vh;
+}
+
+@keyframes rainbow {
+  0% { background-position-x: -200%; }
+  100% { background-position-x: 0%; }
+}
+
+header {
+  background: linear-gradient(to left, #a0a, #0aa, #00a, #0a0, #aa0, #a00, #a0a);
+  background-size: 200%;
+  color: white;
+  display: flex;
+  align-items: center;
+  animation: rainbow 25s linear infinite;
+}
+
+header > * {
+  margin: 4px 10px;
+}
+
+header img {
+  width: 32px;
+  height: 32px;
+  image-rendering: pixelated;
+}
+
+.content {
+  max-width: 680px;
+  padding: 20px;
+  margin: 0 auto;
+}
+
+.circle-crop {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+  border: 4px inset white;
+  margin: 10px;
+}
+
+blockquote {
+  margin: 0;
+  padding: 20px;
+  border: 4px inset #747b7a;
+  border-width: 4px;
+  background-image:
+    linear-gradient(45deg, #ccc 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #ccc 75%),
+    linear-gradient(45deg, transparent 75%, #ccc 75%),
+    linear-gradient(45deg, #ccc 25%, #fff 25%);
+  background-size: 10px 10px;
+  background-position: 0 0, 0 0, -5px -5px, 5px 5px;
+}
+
+blockquote p {
+  background: #bdbdbcdd;
+  padding: 12px;
+  border: 2px solid #bcbcbc;
+  border-top: 2px solid white;
+  border-bottom: 2px solid black;
+  font-style: italic;
+  font-family: monospace
+}
+
+blockquote cite {
+  font-weight: bold;
+}
+
+a,
+a:visited {
+  color: blue;
+}
