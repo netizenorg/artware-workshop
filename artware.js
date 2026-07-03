@@ -13,19 +13,27 @@ const brushes = [
 
 // ------------------------------------------- MENU BUTTONS
 
-nn.get('#save').on('click', () => {
+function save () {
   const main = nn.get('main')
   nn.download(main)
-})
+}
+
+function undo () {
+  const main = nn.get('main')
+  const children = [...main.children].slice(-10).reverse()
+  children.forEach(el => main.removeChild(el))
+}
+
+nn.get('#save').on('click', save)
+
+nn.get('#undo').on('click', undo)
 
 nn.get('#clear').on('click', () => {
   nn.get('main').content(null)
 })
 
-nn.get('#undo').on('click', () => {
-  const main = nn.get('main')
-  const children = [...main.children].slice(-10).reverse()
-  children.forEach(el => main.removeChild(el))
+nn.get('#notes').on('click', () => {
+  window.location.href = 'notes.html'
 })
 
 // ------------------------------------------- DROP DOWN MENUS
@@ -130,8 +138,33 @@ function release () {
   drawing = false
 }
 
+function shortcuts (e) {
+  const key = e.key.toLowerCase()
+  if ((e.ctrlKey || e.metaKey) && key === 'z') {
+    e.preventDefault()
+    undo()
+  } else if ((e.ctrlKey || e.metaKey) && key === 's') {
+    e.preventDefault()
+    save()
+  }
+}
+
+function info (e) {
+  const id = e.target.id
+  const dict = {
+    'b-type': 'switch palette type',
+    'b-pick': 'choose your brush',
+    'b-mode': 'add modifier',
+    'undo': 'undo last stroke',
+    'clear': 'clear entire canvas',
+    'save': 'save as HTML page'
+  }  
+  nn.get('#info').content(dict[id] || null)
+}
+
 // ----------------------------------- EVENT LISTENERS
 
+nn.on('keydown', shortcuts)
 nn.on('pointerdown', touch)
 nn.on('pointerdown', spray)
 nn.on('pointermove', draw)
@@ -140,4 +173,4 @@ nn.on('pointercancel', release)
 nn.on('pointerleave', release)
 nn.get('main').on('pointerleave', release)
 nn.getAll('nav > *').forEach(e => e.on('click', release))
-
+nn.getAll('*').forEach(e => e.on('pointerover', info))
