@@ -72,6 +72,7 @@ nav > * {
   padding: 4px 8px;
   border: 2px outset #b0b0b0;
   font-weight: bold;
+  color: black;
   cursor: pointer;
 }
 
