@@ -3,4 +3,4 @@
 Notes from netizen.org's artware (software art) workshop.
 https://artware.app
 
-`<3 *.O`
+<3 `*.O`
